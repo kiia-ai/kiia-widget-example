@@ -1,4 +1,5 @@
-const KIIA_WIDGET_KEY = "YOUR_KIIA_WIDGET_KEY";
+const FALLBACK_WIDGET_KEY = "YOUR_KIIA_WIDGET_KEY";
+let kiiaWidgetKey = FALLBACK_WIDGET_KEY;
 
 const EXPLANATION_TYPES = {
   fast: 1,
@@ -22,7 +23,22 @@ function setStatus(message, tone = "default") {
 }
 
 function hasPlaceholderKey() {
-  return !KIIA_WIDGET_KEY || KIIA_WIDGET_KEY === "YOUR_KIIA_WIDGET_KEY";
+  return !kiiaWidgetKey || kiiaWidgetKey === FALLBACK_WIDGET_KEY;
+}
+
+async function loadWidgetKey() {
+  try {
+    const response = await fetch("/api/config");
+    if (!response.ok) return;
+
+    const config = await response.json();
+    if (config.widgetKey) {
+      kiiaWidgetKey = config.widgetKey;
+      setStatus("Widget key loaded from Cloudflare environment. Generate an explanation to test it.", "success");
+    }
+  } catch {
+    // Local static servers do not provide /api/config. The placeholder warning handles that case.
+  }
 }
 
 form.addEventListener("submit", function handleSubmit(event) {
@@ -39,7 +55,7 @@ form.addEventListener("submit", function handleSubmit(event) {
   }
 
   if (hasPlaceholderKey()) {
-    setStatus("Replace YOUR_KIIA_WIDGET_KEY in main.js with your assigned widget key.", "error");
+    setStatus("Set KIIA_WIDGET_KEY in Cloudflare Pages or replace the local fallback key in main.js.", "error");
     widgetContainer.innerHTML = "";
     return;
   }
@@ -56,7 +72,7 @@ form.addEventListener("submit", function handleSubmit(event) {
   setStatus("Generating explanation...");
 
   window.Kiia.explain(topic, {
-    key: KIIA_WIDGET_KEY,
+    key: kiiaWidgetKey,
     container: "#kiia-container",
     type: explanationType,
     onReady: function handleReady() {
@@ -67,3 +83,5 @@ form.addEventListener("submit", function handleSubmit(event) {
     },
   });
 });
+
+loadWidgetKey();

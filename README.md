@@ -10,10 +10,10 @@ This example has no build step, no framework, and no package manager requirement
 
 ## Quick Start
 
-1. Replace the placeholder key in `main.js`:
+1. Replace the placeholder key in `main.js` for local static testing:
 
    ```js
-   const KIIA_WIDGET_KEY = "YOUR_KIIA_WIDGET_KEY";
+   const FALLBACK_WIDGET_KEY = "YOUR_KIIA_WIDGET_KEY";
    ```
 
 2. Serve the folder locally:
@@ -29,6 +29,18 @@ This example has no build step, no framework, and no package manager requirement
    ```
 
 The placeholder key will not generate explanations. Use the widget key provided by Kiia, and make sure your website domain has been allowlisted.
+
+## Cloudflare Pages Environment
+
+For the deployed Cloudflare Pages demo, set this environment variable:
+
+```text
+KIIA_WIDGET_KEY=your_widget_key_here
+```
+
+The browser loads it from `/api/config`, which is implemented as a Cloudflare Pages Function. Do not commit real widget keys to the repository.
+
+If `KIIA_WIDGET_KEY` is not set, the demo stays safe and shows a placeholder-key warning before calling Kiia.
 
 ## Minimal Integration
 
@@ -87,12 +99,13 @@ Kiia currently supports three explanation modes. The widget API accepts the nume
 | `index.html` | Static demo page and Kiia script tag. |
 | `styles.css` | Demo page styling. Not required for Kiia itself. |
 | `main.js` | Example widget initialization and local validation. |
+| `functions/api/config.js` | Cloudflare Pages Function that exposes the optional demo widget key from `KIIA_WIDGET_KEY`. |
 
 ## Troubleshooting
 
 ### The demo says to replace the widget key
 
-Update `KIIA_WIDGET_KEY` in `main.js` with your assigned key.
+Set `KIIA_WIDGET_KEY` in Cloudflare Pages environment variables, or update `FALLBACK_WIDGET_KEY` in `main.js` for local-only testing.
 
 ### The widget says the key is invalid or unauthorized
 
