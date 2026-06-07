@@ -4,6 +4,10 @@ A minimal static website that shows how to embed the Kiia explanation widget in 
 
 This example has no build step, no framework, and no package manager requirement. It is meant to be easy for product, engineering, and implementation teams to inspect and copy.
 
+## Live Demo
+
+[https://kiia-widget-example.pages.dev/](https://kiia-widget-example.pages.dev/)
+
 ## Quick Start
 
 1. Replace the placeholder key in `main.js`:
