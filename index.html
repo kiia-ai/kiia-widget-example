@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kiia Widget Example</title>
+  <meta name="description" content="A minimal static website showing how to embed the Kiia explanation widget.">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">Client integration example</p>
+      <h1 id="page-title">Embed Kiia explanations in any website.</h1>
+      <p class="hero-copy">
+        This static sample shows the smallest production-ready integration: load the Kiia script,
+        provide a container, and call <code>Kiia.explain()</code> with a topic and widget key.
+      </p>
+    </section>
+
+    <section class="demo-card" aria-labelledby="demo-title">
+      <div class="demo-header">
+        <div>
+          <p class="eyebrow">Live demo</p>
+          <h2 id="demo-title">Generate an explanation</h2>
+        </div>
+        <span class="environment-pill">Production script</span>
+      </div>
+
+      <form id="kiia-demo-form" class="demo-form">
+        <label for="topic">Topic</label>
+        <div class="input-row">
+          <input
+            id="topic"
+            name="topic"
+            type="text"
+            value="binary search"
+            autocomplete="off"
+            placeholder="Try: binary search, recursion, photosynthesis"
+          >
+          <button type="submit">Generate explanation</button>
+        </div>
+
+        <label for="explanation-type">Explanation type</label>
+        <select id="explanation-type" name="explanation-type">
+          <option value="1" selected>Type 1</option>
+          <option value="2">Type 2</option>
+          <option value="3">Type 3</option>
+        </select>
+      </form>
+
+      <p id="status" class="status" role="status" aria-live="polite">
+        Replace <code>YOUR_KIIA_WIDGET_KEY</code> in <code>main.js</code>, then generate an explanation.
+      </p>
+
+      <div id="kiia-container" class="widget-container" aria-label="Kiia explanation widget"></div>
+    </section>
+
+    <section class="integration-card" aria-labelledby="integration-title">
+      <p class="eyebrow">Minimal integration</p>
+      <h2 id="integration-title">Copy this into your site</h2>
+      <pre><code>&lt;script src="https://kiia.ai/embed/kiia.js"&gt;&lt;/script&gt;
+&lt;div id="kiia-container"&gt;&lt;/div&gt;
+&lt;script&gt;
+  Kiia.explain("binary search", {
+    key: "YOUR_KIIA_WIDGET_KEY",
+    container: "#kiia-container",
+    type: 1,
+    onReady: function () {
+      console.log("Kiia explanation ready");
+    },
+    onError: function (error) {
+      console.error("Kiia error", error);
+    }
+  });
+&lt;/script&gt;</code></pre>
+    </section>
+  </main>
+
+  <script src="https://kiia.ai/embed/kiia.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>
