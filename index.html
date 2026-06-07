@@ -43,9 +43,9 @@
 
         <label for="explanation-type">Explanation type</label>
         <select id="explanation-type" name="explanation-type">
-          <option value="1" selected>Type 1</option>
-          <option value="2">Type 2</option>
-          <option value="3">Type 3</option>
+          <option value="fast" selected>Fast</option>
+          <option value="thinking">Thinking</option>
+          <option value="depth">Depth</option>
         </select>
       </form>
 
@@ -62,10 +62,16 @@
       <pre><code>&lt;script src="https://kiia.ai/embed/kiia.js"&gt;&lt;/script&gt;
 &lt;div id="kiia-container"&gt;&lt;/div&gt;
 &lt;script&gt;
+  const EXPLANATION_TYPES = {
+    fast: 1,
+    thinking: 2,
+    depth: 3
+  };
+
   Kiia.explain("binary search", {
     key: "YOUR_KIIA_WIDGET_KEY",
     container: "#kiia-container",
-    type: 1,
+    type: EXPLANATION_TYPES.fast,
     onReady: function () {
       console.log("Kiia explanation ready");
     },

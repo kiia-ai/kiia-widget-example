@@ -1,5 +1,11 @@
 const KIIA_WIDGET_KEY = "YOUR_KIIA_WIDGET_KEY";
 
+const EXPLANATION_TYPES = {
+  fast: 1,
+  thinking: 2,
+  depth: 3,
+};
+
 const form = document.querySelector("#kiia-demo-form");
 const topicInput = document.querySelector("#topic");
 const typeSelect = document.querySelector("#explanation-type");
@@ -23,7 +29,8 @@ form.addEventListener("submit", function handleSubmit(event) {
   event.preventDefault();
 
   const topic = topicInput.value.trim();
-  const explanationType = Number(typeSelect.value || "1");
+  const selectedType = typeSelect.value || "fast";
+  const explanationType = EXPLANATION_TYPES[selectedType] || EXPLANATION_TYPES.fast;
 
   if (!topic) {
     setStatus("Enter a topic before generating an explanation.", "error");

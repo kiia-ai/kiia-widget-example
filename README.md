@@ -36,10 +36,16 @@ Add the Kiia script, add a container, then call `Kiia.explain()`.
 <div id="kiia-container"></div>
 
 <script>
+  const EXPLANATION_TYPES = {
+    fast: 1,
+    thinking: 2,
+    depth: 3
+  };
+
   Kiia.explain("binary search", {
     key: "YOUR_KIIA_WIDGET_KEY",
     container: "#kiia-container",
-    type: 1,
+    type: EXPLANATION_TYPES.fast,
     onReady: function () {
       console.log("Kiia explanation ready");
     },
@@ -56,9 +62,19 @@ Add the Kiia script, add a container, then call `Kiia.explain()`.
 | --- | --- | --- |
 | `key` | Yes | Your Kiia widget key. |
 | `container` | Yes | CSS selector or HTML element where the widget iframe should render. |
-| `type` | No | Explanation type id. Defaults depend on your Kiia configuration. |
+| `type` | No | Explanation type id. See the explanation types below. |
 | `onReady` | No | Callback fired when the explanation is ready. |
 | `onError` | No | Callback fired when Kiia returns an error. |
+
+## Explanation Types
+
+Kiia currently supports three explanation modes. The widget API accepts the numeric id, while the product names are shown in the demo UI.
+
+| Product name | Widget `type` value | Meaning |
+| --- | --- | --- |
+| `fast` | `1` | Quick explanation for lightweight, fast responses. |
+| `thinking` | `2` | More reasoning-oriented explanation for deeper understanding. |
+| `depth` | `3` | Most detailed explanation for advanced or complex topics. |
 
 ## Files
 
