@@ -30,9 +30,9 @@ This example has no build step, no framework, and no package manager requirement
 
 The placeholder key will not generate explanations. Use the widget key provided by Kiia, and make sure your website domain has been allowlisted.
 
-## Cloudflare Pages Environment
+## Maintainer Testing
 
-For the deployed Cloudflare Pages demo, set this environment variable:
+The hosted demo can be configured with a widget key through the hosting environment:
 
 ```text
 KIIA_WIDGET_KEY=your_widget_key_here
@@ -105,7 +105,7 @@ Kiia currently supports three explanation modes. The widget API accepts the nume
 
 ### The demo says to replace the widget key
 
-Set `KIIA_WIDGET_KEY` in Cloudflare Pages environment variables, or update `FALLBACK_WIDGET_KEY` in `main.js` for local-only testing.
+Replace `YOUR_KIIA_WIDGET_KEY` with your assigned widget key before generating an explanation.
 
 ### The widget says the key is invalid or unauthorized
 

@@ -34,7 +34,7 @@ async function loadWidgetKey() {
     const config = await response.json();
     if (config.widgetKey) {
       kiiaWidgetKey = config.widgetKey;
-      setStatus("Widget key loaded from Cloudflare environment. Generate an explanation to test it.", "success");
+      setStatus("Widget key loaded. Generate an explanation to test it.", "success");
     }
   } catch {
     // Local static servers do not provide /api/config. The placeholder warning handles that case.
@@ -55,7 +55,7 @@ form.addEventListener("submit", function handleSubmit(event) {
   }
 
   if (hasPlaceholderKey()) {
-    setStatus("Set KIIA_WIDGET_KEY in Cloudflare Pages or replace the local fallback key in main.js.", "error");
+    setStatus("Replace YOUR_KIIA_WIDGET_KEY with your assigned Kiia widget key before generating an explanation.", "error");
     widgetContainer.innerHTML = "";
     return;
   }
